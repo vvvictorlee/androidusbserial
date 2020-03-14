@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/FloatWindow.iml" filepath="$PROJECT_DIR$/FloatWindow.iml" />
+      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/floatwindow/floatwindow.iml" filepath="$PROJECT_DIR$/floatwindow/floatwindow.iml" />
+      <module fileurl="file://$PROJECT_DIR$/mytesttemperature.iml" filepath="$PROJECT_DIR$/mytesttemperature.iml" group="mytesttemperature" />
+      <module fileurl="file://$PROJECT_DIR$/app/mytesttemperature-app.iml" filepath="$PROJECT_DIR$/app/mytesttemperature-app.iml" group="mytesttemperature/app" />
+      <module fileurl="file://$PROJECT_DIR$/floatwindow/mytesttemperature-floatwindow.iml" filepath="$PROJECT_DIR$/floatwindow/mytesttemperature-floatwindow.iml" group="mytesttemperature/floatwindow" />
+    </modules>
+  </component>
+</project>
