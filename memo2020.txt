@@ -1,0 +1,188 @@
+set HOME=C:\Users\vvv
+set ANDROID_SDK_HOME=C:\Users\vvv\AppData\Local\Android\Sdk
+set PATH=$PATH%;%ANDROID_SDK_HOME%\platform-tools; %ANDROID_HOME%\emulator;%ANDROID_SDK_HOME%\tools
+emulator.exe -list-avds
+
+
+
+C:\Users\vvv\AppData\Local\Android\Sdk\emulator
+
+C:\Users\vvv\androidsdktools\tools>emulator.exe @Pixel_3_XL_API_28 -writable-system -qemu -serial COM3
+
+adb root
+
+adb shell setenforce 0
+
+adb remount
+
+
+PANIC: Cannot find AVD system path. Please define ANDROID_SDK_ROOT
+PANIC: Broken AVD system path. Check your ANDROID_SDK_ROOT value [ C:\Users\vvv\AppData\Local\Android\Sdk]!
+
+将另一个虚拟串口COM1挂载到Android原生模拟器上（第三方的模拟器，比如夜神、mumu不知道该如何映射串口）
+在Android\sdk\tools\目录下，通过emulator.exe命令行来实现：
+emulator @模拟器名称 -writable-system -qemu -serial COM1
+参数：
+-writable-system以可写的方式打开模拟器(root模拟器需要以此方式打开)
+-qemu -serial COM1挂载串口COM1
+
+
+Failed to open /qemu.conf, err: 2
+HAX is working and emulator runs in fast virt mode.
+
+Failed to open /qemu.conf, err: 2
+HAX is working and emulator runs in fast virt mode.
+emulator: WARNING: EmulatorService.cpp:448: Cannot find certfile: C:\Users\vvv\AppData\Local\Android\Sdk\emulator-grpc.cer security will be disabled.
+Started GRPC server at 127.0.0.1:8554
+Your emulator is out of date, please update by launching Android Studio:
+ - Start Android Studio
+ - Select menu "Tools > Android > SDK Manager"
+ - Click "SDK Tools" tab
+ - Check "Android Emulator" checkbox
+ - Click "OK"
+
+emulator -avd Pixel_3_XL_API_28
+
+C:\Users\vvv\AppData\Local\Android\Sdk\tools
+
+adb root
+
+adb shell setenforce 0
+adb disable-verity
+adb reboot
+adb remount
+remount of the / superblock failed: Permission denied
+remount failed
+\
+Failed to open /qemu.conf, err: 2
+
+ adb root
+adb disable-verity
+adb reboot
+adb root
+adb remount
+​
+
+If you are using macOS, add both Android SDK emulator and tools directories to the path:
+
+Step 1: In my case the order was important, first emulator and then tools.
+
+export ANDROID_HOME=$HOME/Library/Android/sdk
+export PATH=$PATH:$ANDROID_HOME/emulator
+export PATH=$PATH:$ANDROID_HOME/tools
+export PATH=$PATH:$ANDROID_HOME/tools/bin
+export PATH=$PATH:$ANDROID_HOME/platform-tools
+
+
+
+export ANDROID_SDK=$HOME/Library/Android/sdk
+export PATH=$ANDROID_SDK/emulator:$ANDROID_SDK/tools:$PATH
+
+# Remove $HOME/Library/Android paths
+# The new way is to use ANDROID_SDK_ROOT
+export ANDROID_SDK_ROOT="/usr/local/share/android-sdk"
+# For good measure, add old paths to be backwards compatible with any scripts or 
+whatnot. And to hopefully decrease confusion:
+export ANDROID_HOME=$ANDROID_SDK_ROOT
+export ANDROID_NDK_HOME=$ANDROID_SDK_ROOT/ndk-bundle
+
+
+
+PANIC: Missing emulator engine program for 'x86' CPU.
+
+ set ANDROID_AVD_HOME=%USERPROFILE%\.android\avd
+
+ANDROID_SDK_ROOT
+
+ C:\Users\vvv\AppData\Local\Android\Sdk
+
+C:\Users\vvv\androidsdktools\tools
+
+
+Please follow below step to run AVD
+
+F:\AndroidStudioSetup\sdk>cd tools
+
+F:\AndroidStudioSetup\sdk\tools>emulator -list-avds Nexus_5_API_24
+
+F:\AndroidStudioSetup\sdk\tools>emulator -avd Nexus_5_API_24
+
+Hax is enabled
+
+
+Go to 'My Computer'-> 'Properties' ->'Advance System Settings' -> 'Environment Variables' -> inside 'System Variables' add "ANDROID_SDK_ROOT" or "ANDROID_HOME" and inside this set the path of your AVD.
+
+After that Restart your Computer. You must Restart your computer, otherwise it won't work.
+
+This method worked for me, situations may be different in other cases. Look here for more information.
+
+It may be caused by improper SDK location.
+
+Open 'SDK Manager'. Or in setting, click 'Appearance & Behavior'->'System Setting'->'Android SDK'.
+
+Click 'Edit' besides 'Android SDK Location'. Set your Android SDK Location to 'C:\Users\???\AppData\Local\Android\Sdk' (replace ??? with your account).
+
+
+8.0以后，串口访问越来越麻烦，各种权限受限，把这两天遇到的麻烦Mark一下，希望同行看见后有所借鉴。
+关于权限，我总结了下，主要有三点：
+1、app 要有系统权限
+在AndroidManifest.xml里加上
+android:process=“system”
+android:sharedUserId=“android.uid.system”
+不过这样的话，app就要放到源码里编译了。
+2、 /dev/ttyS4要有读写权限 （你的串口不一定是这个ttyS4）
+ls -l /dev/ttyS4
+如果没有读写权限，记得在init.rc里面添加
+chmod 777 /dev/ttyS4
+3、做完上面两步，本来想这会该有访问权限了吧，结果还是拒绝访问，一脸的懵逼。
+后来想起来有可能是selinux搞得鬼，然后将selinux设为 permissive模式以后，终于可以通讯了。
+不过每次adb shell输入setenforce 0 还是不爽，
+我们在源码里访问权限加上。
+可以参考 https://blog.csdn.net/huangyabin001/article/details/79290382
+我这里具体的更改为
+Rk3288/system/sepolicy/private/system_app.te
+加上这么两句话
+allow system_app serial_device:chr_file { open read write ioctl getattr };
+allow system_app proc_stat:file { getattr };
+这样那些自己驱动里创建的设备节点也就可以访问了。
+然后mmm sepolicy。
+串口的操作用的是android-serialport-api ，只不过我的代码里将ndk-build改成了cmake，如果不会操作，一搜一大把。
+开发环境 androidStudio ndk cmake
+
+查看在线设备 命令
+
+adb devices
+
+emulator-5554   offline
+
+8a83aca2        device 
+
+其中emulator-5554就是模拟器在线的名字
+
+adb -s 模拟器名字shell
+
+无反应：adb shell
+
+输入：adb kill-server   
+
+输入：adbstart-server
+
+检测串口com是否映射成功。调试助手，打开COM2
+
+输入：echo 1111 >/dev/ttyS1
+
+输入：cat  /dev/ttyS1 
+
+权限问题，apk运行无法打开串口，可能是权限问题
+
+adb root
+
+输入：setenforce 0 关闭防火墙（关键）之前就是不知道这个一直不成功
+
+输入：chmod 777 /dev/ttyS2 修改权限(ttyS*端口要对应，如果不知道的话，每个都试一下)
+
+其中demo  用的是  感谢
+
+小王_同志的博客  
+Hoyn
+http://blog.csdn.net/qq_35952946/article/details/78863871      
