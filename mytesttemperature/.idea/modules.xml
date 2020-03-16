@@ -3,11 +3,13 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/FloatWindow.iml" filepath="$PROJECT_DIR$/FloatWindow.iml" />
+      <module fileurl="file://$PROJECT_DIR$/SerialPortLibrary/SerialPortLibrary.iml" filepath="$PROJECT_DIR$/SerialPortLibrary/SerialPortLibrary.iml" group="mytesttemperature/SerialPortLibrary" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/floatwindow/floatwindow.iml" filepath="$PROJECT_DIR$/floatwindow/floatwindow.iml" />
       <module fileurl="file://$PROJECT_DIR$/mytesttemperature.iml" filepath="$PROJECT_DIR$/mytesttemperature.iml" group="mytesttemperature" />
       <module fileurl="file://$PROJECT_DIR$/app/mytesttemperature-app.iml" filepath="$PROJECT_DIR$/app/mytesttemperature-app.iml" group="mytesttemperature/app" />
       <module fileurl="file://$PROJECT_DIR$/floatwindow/mytesttemperature-floatwindow.iml" filepath="$PROJECT_DIR$/floatwindow/mytesttemperature-floatwindow.iml" group="mytesttemperature/floatwindow" />
+      <module fileurl="file://$PROJECT_DIR$/ok-usb/ok-usb.iml" filepath="$PROJECT_DIR$/ok-usb/ok-usb.iml" group="mytesttemperature/ok-usb" />
     </modules>
   </component>
 </project>

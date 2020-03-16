@@ -22,7 +22,7 @@ import android.support.annotation.NonNull;
 import java.util.Date;
 import java.util.List;
 
-@Database(entities = {DataBaseForBrowser.Bookmark.class, DataBaseForBrowser.History.class, DataBaseForBrowser.Setting.class, DataBaseForBrowser.AdServerData.class}, version = 3)
+@Database(entities = {DataBaseForBrowser.Bookmark.class, DataBaseForBrowser.History.class, DataBaseForBrowser.Setting.class, DataBaseForBrowser.AdServerData.class}, version = 3, exportSchema = false)
 @TypeConverters({DataBaseForBrowser.Converters.class})
 public abstract class DataBaseForBrowser extends RoomDatabase {
     public static String DATABASE_NAME = "browser_data";

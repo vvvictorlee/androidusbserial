@@ -45,13 +45,17 @@
                 android:id="@+id/maxinc"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="+" />
+                android:background="#2196F3"
+                android:text="+"
+                android:textColor="#FFFFFF" />
 
             <Button
                 android:id="@+id/maxdec"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="-" />
+                android:background="#2196F3"
+                android:text="-"
+                android:textColor="#FFFFFF" />
 
         </TableRow>
 
@@ -89,25 +93,23 @@
                 android:id="@+id/mininc"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="+" />
+                android:background="#2196F3"
+                android:text="+"
+                android:textColor="#FFFFFF" />
 
             <Button
                 android:id="@+id/mindec"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="-" />
+                android:background="#2196F3"
+                android:text="-"
+                android:textColor="#FFFFFF" />
 
         </TableRow>
 
         <TableRow
             android:layout_width="match_parent"
             android:layout_height="match_parent">
-
-            <TextView
-                android:id="@+id/textViewTest"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="TextView" />
 
             <EditText
                 android:id="@+id/editTextTest"
@@ -117,6 +119,28 @@
                 android:inputType="number"
                 android:text="39" />
 
+            <com.example.jack8.floatwindow.FwEditView
+                android:id="@+id/editText"
+                style="@style/AppTheme.WindiowText"
+                android:layout_width="48dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:ems="0"
+                android:gravity="right"
+                android:text="2"
+                android:textSize="24sp" />
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" >
+
+            <TextView
+                android:id="@+id/textViewTest"
+                android:layout_width="92dp"
+                android:layout_height="wrap_content"
+                android:text="TextView" />
         </TableRow>
 
         <TableRow
@@ -129,6 +153,16 @@
                 android:layout_height="wrap_content"
                 android:text="Test" />
 
+            <ImageButton
+                android:id="@+id/del"
+                style="@style/AppTheme.Button"
+                android:layout_width="55dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0"
+                android:src="@drawable/arrow"
+                android:tag="del"
+                android:theme="@style/AppTheme.Button" />
+
         </TableRow>
 
     </TableLayout>
@@ -138,27 +172,6 @@
         android:layout_height="53dp"
         android:layout_weight="0"
         android:orientation="horizontal">
-
-        <com.example.jack8.floatwindow.FwEditView
-            android:id="@+id/editText"
-            style="@style/AppTheme.WindiowText"
-            android:layout_width="48dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:ems="0"
-            android:gravity="right"
-            android:text="0"
-            android:textSize="24sp" />
-
-        <ImageButton
-            android:id="@+id/del"
-            style="@style/AppTheme.Button"
-            android:layout_width="55dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="0"
-            android:src="@drawable/arrow"
-            android:tag="del"
-            android:theme="@style/AppTheme.Button" />
 
     </LinearLayout>
 
